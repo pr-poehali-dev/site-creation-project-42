@@ -7,6 +7,7 @@ import Icon from '@/components/ui/icon';
 import PhoneOptimizationGuide from '@/components/PhoneOptimizationGuide';
 import AIGuide from '@/components/AIGuide';
 import AIChatbot from '@/components/AIChatbot';
+import VisitsAnalytics from '@/components/VisitsAnalytics';
 
 interface Article {
   id: number;
@@ -72,13 +73,13 @@ const mockArticles: Article[] = [
   },
   {
     id: 6,
-    title: "CSS Grid и Flexbox: когда что использовать",
-    description: "Сравнение двух мощных инструментов для создания макетов",
-    category: "Разработка",
-    tags: ["CSS", "Layout", "Frontend"],
+    title: "Аналитика посещений сайта",
+    description: "Детальная статистика визитов: география, устройства, источники трафика и время на сайте",
+    category: "Аналитика",
+    tags: ["Статистика", "Посещения", "Метрики", "Данные"],
     date: "23 октября 2025",
-    readTime: "7 мин",
-    image: "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&q=80"
+    readTime: "∞",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
   }
 ];
 
@@ -182,7 +183,7 @@ const Index = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredArticles.map((article, index) => (
-              article.id === 1 || article.id === 2 || article.id === 3 ? (
+              article.id === 1 || article.id === 2 || article.id === 3 || article.id === 6 ? (
                 <Dialog key={article.id}>
                   <DialogTrigger asChild>
                     <Card 
@@ -205,6 +206,14 @@ const Index = () => {
                             <Badge className="bg-accent text-white border-0 text-sm px-4 py-2">
                               <Icon name="MessageCircle" size={16} className="mr-1" />
                               Интерактивный чат
+                            </Badge>
+                          </div>
+                        )}
+                        {article.id === 6 && (
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-center pb-4">
+                            <Badge className="bg-primary text-white border-0 text-sm px-4 py-2">
+                              <Icon name="BarChart3" size={16} className="mr-1" />
+                              Живая статистика
                             </Badge>
                           </div>
                         )}
@@ -244,7 +253,7 @@ const Index = () => {
                         {article.title}
                       </DialogTitle>
                     </DialogHeader>
-                    {article.id === 1 ? <AIChatbot /> : article.id === 3 ? <PhoneOptimizationGuide /> : <AIGuide />}
+                    {article.id === 1 ? <AIChatbot /> : article.id === 3 ? <PhoneOptimizationGuide /> : article.id === 6 ? <VisitsAnalytics /> : <AIGuide />}
                   </DialogContent>
                 </Dialog>
               ) : (
