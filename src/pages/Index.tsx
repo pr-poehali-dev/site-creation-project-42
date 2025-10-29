@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
 import PhoneOptimizationGuide from '@/components/PhoneOptimizationGuide';
+import AIGuide from '@/components/AIGuide';
 
 interface Article {
   id: number;
@@ -30,13 +31,13 @@ const mockArticles: Article[] = [
   },
   {
     id: 2,
-    title: "React 19: Новые возможности",
-    description: "Обзор ключевых изменений в новой версии React и как их применять",
-    category: "Разработка",
-    tags: ["React", "JavaScript", "Frontend"],
+    title: "Искусственный интеллект: Полный гайд по развитию ИИ в 2025",
+    description: "От истоков до GPT-4o и Claude: как развивался ИИ, современные возможности и будущее технологий умного интеллекта",
+    category: "Искусственный интеллект",
+    tags: ["ИИ", "GPT", "Машинное обучение", "Нейросети", "Будущее"],
     date: "27 октября 2025",
-    readTime: "8 мин",
-    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80"
+    readTime: "20 мин",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
   },
   {
     id: 3,
@@ -180,7 +181,7 @@ const Index = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredArticles.map((article, index) => (
-              article.id === 3 ? (
+              article.id === 3 || article.id === 2 ? (
                 <Dialog key={article.id}>
                   <DialogTrigger asChild>
                     <Card 
@@ -234,7 +235,7 @@ const Index = () => {
                         {article.title}
                       </DialogTitle>
                     </DialogHeader>
-                    <PhoneOptimizationGuide />
+                    {article.id === 3 ? <PhoneOptimizationGuide /> : <AIGuide />}
                   </DialogContent>
                 </Dialog>
               ) : (
