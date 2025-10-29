@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
+import PhoneOptimizationGuide from '@/components/PhoneOptimizationGuide';
 
 interface Article {
   id: number;
@@ -38,13 +40,13 @@ const mockArticles: Article[] = [
   },
   {
     id: 3,
-    title: "Оптимизация производительности приложений",
-    description: "Практические советы по ускорению загрузки и улучшению UX",
-    category: "Производительность",
-    tags: ["Оптимизация", "Performance", "Best Practices"],
+    title: "Полное руководство по ускорению Android-смартфона",
+    description: "Исчерпывающий гайд: от очистки памяти до отключения анимаций и настройки системы для максимальной производительности",
+    category: "Оптимизация",
+    tags: ["Android", "Смартфон", "Производительность", "Ускорение", "Настройки"],
     date: "26 октября 2025",
-    readTime: "12 мин",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+    readTime: "15 мин",
+    image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=800&q=80"
   },
   {
     id: 4,
@@ -178,51 +180,110 @@ const Index = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredArticles.map((article, index) => (
-              <Card 
-                key={article.id} 
-                className="group overflow-hidden hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover-scale cursor-pointer border-2 hover:border-primary/50 animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={article.image} 
-                    alt={article.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 right-4">
-                    <Badge className="gradient-bg text-white border-0 shadow-lg">
-                      {article.category}
-                    </Badge>
-                  </div>
-                </div>
-                <CardHeader>
-                  <div className="flex items-center gap-3 text-sm text-muted-foreground mb-2">
-                    <div className="flex items-center gap-1">
-                      <Icon name="Calendar" size={14} />
-                      {article.date}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Icon name="Clock" size={14} />
-                      {article.readTime}
-                    </div>
-                  </div>
-                  <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                    {article.title}
-                  </CardTitle>
-                  <CardDescription className="text-base">
-                    {article.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {article.tags.map(tag => (
-                      <Badge key={tag} variant="secondary" className="text-xs">
-                        {tag}
+              article.id === 3 ? (
+                <Dialog key={article.id}>
+                  <DialogTrigger asChild>
+                    <Card 
+                      className="group overflow-hidden hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover-scale cursor-pointer border-2 hover:border-primary/50 animate-fade-in"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                      <div className="relative h-48 overflow-hidden">
+                        <img 
+                          src={article.image} 
+                          alt={article.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute top-4 right-4">
+                          <Badge className="gradient-bg text-white border-0 shadow-lg">
+                            {article.category}
+                          </Badge>
+                        </div>
+                      </div>
+                      <CardHeader>
+                        <div className="flex items-center gap-3 text-sm text-muted-foreground mb-2">
+                          <div className="flex items-center gap-1">
+                            <Icon name="Calendar" size={14} />
+                            {article.date}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Icon name="Clock" size={14} />
+                            {article.readTime}
+                          </div>
+                        </div>
+                        <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                          {article.title}
+                        </CardTitle>
+                        <CardDescription className="text-base">
+                          {article.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="flex flex-wrap gap-2">
+                          {article.tags.map(tag => (
+                            <Badge key={tag} variant="secondary" className="text-xs">
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle className="text-3xl gradient-text">
+                        {article.title}
+                      </DialogTitle>
+                    </DialogHeader>
+                    <PhoneOptimizationGuide />
+                  </DialogContent>
+                </Dialog>
+              ) : (
+                <Card 
+                  key={article.id} 
+                  className="group overflow-hidden hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover-scale cursor-pointer border-2 hover:border-primary/50 animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={article.image} 
+                      alt={article.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 right-4">
+                      <Badge className="gradient-bg text-white border-0 shadow-lg">
+                        {article.category}
                       </Badge>
-                    ))}
+                    </div>
                   </div>
-                </CardContent>
-              </Card>
+                  <CardHeader>
+                    <div className="flex items-center gap-3 text-sm text-muted-foreground mb-2">
+                      <div className="flex items-center gap-1">
+                        <Icon name="Calendar" size={14} />
+                        {article.date}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Icon name="Clock" size={14} />
+                        {article.readTime}
+                      </div>
+                    </div>
+                    <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                      {article.title}
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      {article.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {article.tags.map(tag => (
+                        <Badge key={tag} variant="secondary" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )
             ))}
           </div>
         )}
