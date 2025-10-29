@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import Icon from '@/components/ui/icon';
 import PhoneOptimizationGuide from '@/components/PhoneOptimizationGuide';
 import AIGuide from '@/components/AIGuide';
+import AIChatbot from '@/components/AIChatbot';
 
 interface Article {
   id: number;
@@ -21,13 +22,13 @@ interface Article {
 const mockArticles: Article[] = [
   {
     id: 1,
-    title: "Современные тренды веб-дизайна 2025",
-    description: "Погружаемся в актуальные направления дизайна: градиенты, анимации и минимализм",
-    category: "Дизайн",
-    tags: ["UI/UX", "Тренды", "Веб-дизайн"],
-    date: "28 октября 2025",
-    readTime: "5 мин",
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=80"
+    title: "ИИ-Чат: Поговори с искусственным интеллектом",
+    description: "Интерактивный чат-бот с ИИ. Задай вопрос об искусственном интеллекте и получи мгновенный ответ",
+    category: "Интерактив",
+    tags: ["Чат", "ИИ", "Интерактив", "Бот"],
+    date: "29 октября 2025",
+    readTime: "∞",
+    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80"
   },
   {
     id: 2,
@@ -181,7 +182,7 @@ const Index = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredArticles.map((article, index) => (
-              article.id === 3 || article.id === 2 ? (
+              article.id === 1 || article.id === 2 || article.id === 3 ? (
                 <Dialog key={article.id}>
                   <DialogTrigger asChild>
                     <Card 
@@ -199,6 +200,14 @@ const Index = () => {
                             {article.category}
                           </Badge>
                         </div>
+                        {article.id === 1 && (
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-center pb-4">
+                            <Badge className="bg-accent text-white border-0 text-sm px-4 py-2">
+                              <Icon name="MessageCircle" size={16} className="mr-1" />
+                              Интерактивный чат
+                            </Badge>
+                          </div>
+                        )}
                       </div>
                       <CardHeader>
                         <div className="flex items-center gap-3 text-sm text-muted-foreground mb-2">
@@ -235,7 +244,7 @@ const Index = () => {
                         {article.title}
                       </DialogTitle>
                     </DialogHeader>
-                    {article.id === 3 ? <PhoneOptimizationGuide /> : <AIGuide />}
+                    {article.id === 1 ? <AIChatbot /> : article.id === 3 ? <PhoneOptimizationGuide /> : <AIGuide />}
                   </DialogContent>
                 </Dialog>
               ) : (
